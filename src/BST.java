@@ -155,5 +155,16 @@ public class BST<Key extends Comparable<Key>, Value> {
             else if (t < n) return median(x.right, n-t-1); // if it smaller go right 
             else            return x.key;                // if equal return median
         }
+        public int findSize(){
+     	   return findSize(root);  // start from the root
+         }
+         
+         private int findSize(Node node){
+         	if (node==null)
+         		return 0;
+         	
+             	return 1+findSize(node.left)+findSize(node.right); // add each left and right nodes together
+
+         }
 
 }
