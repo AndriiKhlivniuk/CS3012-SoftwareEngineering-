@@ -1,4 +1,5 @@
 
+
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
     /**
@@ -140,5 +141,19 @@ public class BST<Key extends Comparable<Key>, Value> {
         }               // recursively return node from left and right branches, 
                         // stops when node equals to null. return max value 
       }
+      public Key median() {
+          if (isEmpty()) return null;
+         //TODO fill in the correct implementation. The running time should be Theta(h), where h is the height of the tree.
+          
+          int n=(size()-1)/2;  // position of median node
+          return median(root,n);  // start finding median from root
+        }
+        private Key median(Node x, int n){
+        	
+        	int t = size(x.left);   // size of the left branch 
+            if      (t > n) return median(x.left,  n); // if size of left branch greater then median position go left
+            else if (t < n) return median(x.right, n-t-1); // if it smaller go right 
+            else            return x.key;                // if equal return median
+        }
 
 }

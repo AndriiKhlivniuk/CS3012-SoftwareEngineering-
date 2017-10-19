@@ -86,5 +86,22 @@ public class BSTTest
                       //         5
      assertEquals("Checking height of the tree", 4, bst.height());
  }
- 
+    @Test
+    
+ 	public void testMedian(){
+	 BST<String, Integer> bst = new BST<String, Integer>();
+	 
+	 assertEquals("Checking median of emty tree",null, bst.median());
+	 
+     bst.put("7", 7);   //        _7_
+     bst.put("8", 8);   //      /     \
+     bst.put("3", 3);   //    _3_      8
+     bst.put("1", 1);   //  /     \
+     bst.put("2", 2);   // 1       6
+     bst.put("6", 6);   //  \     /
+     bst.put("4", 4);   //   2   4
+     bst.put("5", 5);   //        \
+                        //         5
+     assertEquals("Checking median of non-empty tree","4", bst.median());
+ }
 }
