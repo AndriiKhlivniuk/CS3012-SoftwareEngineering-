@@ -126,6 +126,19 @@ public class BST<Key extends Comparable<Key>, Value> {
           
           return"("+ printKeysInOrder(x.left)+")"+x.key+"("+printKeysInOrder(x.right)+")";
        }
+      public int height(){
+      	
+      	return height(root);   // start counting height from the root
+      }
       
+      private int height(Node node) {
+        //TODO fill in the correct implementation.
+        if(node==null)
+      	  return -1;
+        else{
+      	  return 1 + Math.max(height(node.left), height(node.right)); 
+        }               // recursively return node from left and right branches, 
+                        // stops when node equals to null. return max value 
+      }
 
 }
