@@ -1,5 +1,4 @@
 
-
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
     /**
@@ -184,6 +183,26 @@ public class BST<Key extends Comparable<Key>, Value> {
            	+prettyPrintKeys(x.right,prefix+"  ");
            	// passing to function different prefix, depends on branch 
           }
-           
+          // code to find Lowest Common ancestor using recursion
+          public Key LowestCommonAncestor(Key x, Key y){
+          	if (x==y)
+          		return x;
+          	int cmp= x.compareTo(y);
+          	if (cmp<0)
+          		return LowestCommonAncestor(root, x, y);
+          	else
+          		return LowestCommonAncestor(root, y, x);
+          }
+          private Key LowestCommonAncestor(Node root, Key x, Key y){
+          	int cmpX=x.compareTo(root.key);
+          	int cmpY=y.compareTo(root.key);
+          	if (cmpX>0&&cmpY>0)
+          		return LowestCommonAncestor(root.right, x, y);
+          	if (cmpX<0&&cmpY<0)
+          		return LowestCommonAncestor(root.left, x, y);
+          	else
+          		return root.key;
+          }
+          	   
 
 }

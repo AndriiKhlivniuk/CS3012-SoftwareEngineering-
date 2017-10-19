@@ -162,5 +162,23 @@ public class BSTTest
  	      "    -null\n";
  	     assertEquals("Checking pretty printing of non-empty tree", result, bst.prettyPrintKeys());
  	     }
+    @Test
+ 	public void testLowestCommonAncestor(){
+	 BST<String, Integer> bst = new BST<String, Integer>();
 
+     
+	 bst.put("7", 7);   //        _7_
+     bst.put("8", 8);   //      /     \
+     bst.put("3", 3);   //    _3_      8
+     bst.put("1", 1);   //  /     \
+     bst.put("2", 2);   // 1       6
+     bst.put("6", 6);   //  \     /
+     bst.put("4", 4);   //   2   4
+     bst.put("5", 5);   //        \
+                        //         5
+     
+     assertEquals("Checking height of the tree", "7", bst.LowestCommonAncestor("1","8"));
+	 
+ }
+ 
 }
