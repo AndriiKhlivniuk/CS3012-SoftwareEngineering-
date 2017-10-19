@@ -178,7 +178,30 @@ public class BSTTest
                         //         5
      
      assertEquals("Checking height of the tree", "7", bst.LowestCommonAncestor("1","8"));
+
+
 	 
  }
+ 
+    @Test
+ 	public void testPrintKeysInOrder(){
+	 BST<Integer, Integer> bst = new BST<Integer, Integer>();
+
+     
+     bst.put(7, 7);   //        _7_
+     bst.put(8, 8);   //      /     \
+     bst.put(3, 3);   //    _3_      8
+     bst.put(1, 1);   //  /     \
+     bst.put(2, 2);   // 1       6
+     bst.put(6, 6);   //  \     /
+     bst.put(4, 4);   //   2   4
+     bst.put(5, 5);   //        \
+                      //         5
+     
+     assertEquals("Checking order of constructed tree",
+             "(((()1(()2()))3((()4(()5()))6()))7(()8()))", bst.printKeysInOrder());
+	 
+ }
+ 
  
 }
