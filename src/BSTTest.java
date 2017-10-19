@@ -118,5 +118,49 @@ public class BSTTest
                       //         5
      assertEquals("Checking size of the tree", 8, bst.findSize());
  }
- 
+ 	@Test
+ 	 public void testPrettyPrint() {
+ 	     BST<Integer, Integer> bst = new BST<Integer, Integer>();
+ 	     assertEquals("Checking pretty printing of empty tree",
+ 	             "-null\n", bst.prettyPrintKeys());
+ 	      
+ 	                          //  -7
+ 	                          //   |-3
+ 	                          //   | |-1
+ 	                          //   | | |-null
+ 	     bst.put(7, 7);       //   | |  -2
+ 	     bst.put(8, 8);       //   | |   |-null
+ 	     bst.put(3, 3);       //   | |    -null
+ 	     bst.put(1, 1);       //   |  -6
+ 	     bst.put(2, 2);       //   |   |-4
+ 	     bst.put(6, 6);       //   |   | |-null
+ 	     bst.put(4, 4);       //   |   |  -5
+ 	     bst.put(5, 5);       //   |   |   |-null
+ 	                          //   |   |    -null
+ 	                          //   |    -null
+ 	                          //    -8
+ 	                          //     |-null
+ 	                          //      -null
+ 	     
+ 	     String result = 
+ 	      "-7\n" +
+ 	      " |-3\n" + 
+ 	      " | |-1\n" +
+ 	      " | | |-null\n" + 
+ 	      " | |  -2\n" +
+ 	      " | |   |-null\n" +
+ 	      " | |    -null\n" +
+ 	      " |  -6\n" +
+ 	      " |   |-4\n" +
+ 	      " |   | |-null\n" +
+ 	      " |   |  -5\n" +
+ 	      " |   |   |-null\n" +
+ 	      " |   |    -null\n" +
+ 	      " |    -null\n" +
+ 	      "  -8\n" +
+ 	      "   |-null\n" +
+ 	      "    -null\n";
+ 	     assertEquals("Checking pretty printing of non-empty tree", result, bst.prettyPrintKeys());
+ 	     }
+
 }

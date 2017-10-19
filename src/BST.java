@@ -166,5 +166,24 @@ public class BST<Key extends Comparable<Key>, Value> {
              	return 1+findSize(node.left)+findSize(node.right); // add each left and right nodes together
 
          }
+         
+         public String prettyPrintKeys() {
+             //TODO fill in the correct implementation.
+           	if(isEmpty())
+           		return "-null\n";
+           	String prefix="";
+           	
+           		return prettyPrintKeys(root, prefix);
+           }
+           
+          private String prettyPrintKeys(Node x, String prefix){
+           	if(x==null)
+           		return prefix+"-null\n";
+           	 
+           	return ""+prefix+"-"+x.key+"\n"+prettyPrintKeys(x.left,prefix+" "+"|")
+           	+prettyPrintKeys(x.right,prefix+"  ");
+           	// passing to function different prefix, depends on branch 
+          }
+           
 
 }
