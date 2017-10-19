@@ -104,6 +104,7 @@ public class BSTTest
                         //         5
      assertEquals("Checking median of non-empty tree","4", bst.median());
  }
+  @Test
  	public void testFindSize(){
 	 BST<Integer, Integer> bst = new BST<Integer, Integer>();
      
