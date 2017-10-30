@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BST<Key extends Comparable<Key>, Value> {
-    public Node root;             // root of BST
+    private Node root;             // root of BST
     /**
      * Private node class.
      */
@@ -128,8 +128,7 @@ public class BST<Key extends Comparable<Key>, Value> {
       
       private String printKeysInOrder(Node x, int i) {
           if (x==null) return "";
-          if(x.successor!=null)
-        	  return"("+ printKeysInOrder(x.left,i)+")"+x.key+"("+printKeysInOrder(x.right,i)+")"+"["+printKeysInOrder(x.successor.get(i),i+1)+"]";
+          
           return"("+ printKeysInOrder(x.left,i)+")"+x.key+"("+printKeysInOrder(x.right,i)+")";
        }
       public int height(){
@@ -225,20 +224,56 @@ public class BST<Key extends Comparable<Key>, Value> {
         	 return null;
             	
               }
-public static void main(String[] args) {        
-	 BST<Integer, Integer> bst = new BST<Integer, Integer>();
-	    bst.delete(1);
-	    //assertEquals("Deleting from empty tree", "()", bst.printKeysInOrder());
-	    
-	    bst.put(7, 7);   //        _7_
-	    bst.put(8, 8);   //      /     \
-	    bst.putDag(4, 4, bst.root);
-	    bst.putDag(5, 5, bst.root);
-	    System.out.println( bst.root.successor.get(1).key);
-	    List<String> a = new ArrayList<String>();
-	  //a.add("aa");
-	  //System.out.println(a.next());
-}
+         
+         public class DAG<Key extends Comparable<Key>, Value> {
+        	    public Node root;             // root of BST
+        	    /**
+        	     * Private node class.
+        	     */
+        	    private class Node {
+        	      ;  // left and right subtrees
+        	        List<Node> successor;
+        	        private int key;           // number of nodes in subtree
+
+        	        public Node(int key) {
+        	            this.key = key;
+        	        }
+        	    }
+
+
+        	      public Node putDag(int key, Node toConnect){
+        	        	  
+        	        	 if (toConnect.successor==null)
+        	        		 toConnect.successor=new ArrayList<Node>();
+        	        	 return  putDag1( key,  toConnect);
+        	         }
+        	      private Node putDag1(int key, Node toConnect) {
+        	        	 if (toConnect != null) {
+        	        		 Node temp=new Node(key);
+        	        		 toConnect.successor.add(temp);
+        	        		 return temp;
+        	        	 }
+        	        	 return null;
+        	            	
+        	              }
+         }
+         
+ 
+ public static void main(String[] args) {        
+     BST<Integer, Integer> bst = new BST<Integer, Integer>();
+           	    bst.delete(1);
+           	    //assertEquals("Deleting from empty tree", "()", bst.printKeysInOrder());
+           	    
+           	    bst.put(7, 7);   //        _7_
+           	    bst.put(8, 8);   //      /     \
+           	    bst.putDag1(4, 4, bst.root);
+           	    bst.putDag1(5, 5, bst.root);
+           	    System.out.println( bst.root.successor.get(1).key);
+           	    List<String> a = new ArrayList<String>();
+           	  //a.add("aa");
+           	    
+           	  //System.out.println(a.next());
+   }
 
 }
 
