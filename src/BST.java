@@ -225,7 +225,7 @@ public class BST<Key extends Comparable<Key>, Value> {
             	
               }
          
-         public class DAG<Key extends Comparable<Key>, Value> {
+  public static class DAG<Key extends Comparable<Key>, Value> {
         	    public Node root;             // root of BST
         	    /**
         	     * Private node class.
@@ -240,36 +240,58 @@ public class BST<Key extends Comparable<Key>, Value> {
         	        }
         	    }
 
-
-        	      public Node putDag(int key, Node toConnect){
-        	        	  
-        	        	 if (toConnect.successor==null)
-        	        		 toConnect.successor=new ArrayList<Node>();
-        	        	 return  putDag1( key,  toConnect);
-        	         }
-        	      private Node putDag1(int key, Node toConnect) {
-        	        	 if (toConnect != null) {
-        	        		 Node temp=new Node(key);
-        	        		 toConnect.successor.add(temp);
-        	        		 return temp;
-        	        	 }
-        	        	 return null;
-        	            	
-        	              }
+        	   public Node addNode(int key){
+        	    	if (root==null)
+        	    		return root=new Node(key);
+        	    	if(root.successor==null)
+        	    		root.successor=new ArrayList<Node>();
+        	    	
+        	    	Node tmp= new Node(key);
+        	    	root.successor.add(tmp);
+        	    	return tmp;
+        	    }
+        	    public Node connect(int key, int newNode){
+        	    	Node find=search(key);
+        	    	if(find.successor==null)
+        	    		find.successor=new ArrayList<Node>();
+        	    	Node tmp= new Node(newNode);
+        	    	find.successor.add(tmp);
+        	    	return tmp;
+        	    }
+        	    public Node search(int key){
+        	    	if (root.key==key)
+        	    		return root;
+        	    	return search(root, key, 0);
+        	    }
+        	    
+        	    private Node search(Node find, int key, int j){
+        	    	if (find.key==key)
+        	    		return find;
+        	    	
+        	    	int i=-1;
+        	    	if(find.successor!=null){
+	        	    	while(i<find.successor.size()){
+	        	    		i++;
+	        	    		if(find.successor.get(i).key==key)
+	        	    			return find.successor.get(i);
+	        	    	}
+        	    	}
+        	     return search(find.successor.get(j),key, j+1);
+        	    }
+        	    
+        	     
          }
          
  
  public static void main(String[] args) {        
-     BST<Integer, Integer> bst = new BST<Integer, Integer>();
-           	    bst.delete(1);
-           	    //assertEquals("Deleting from empty tree", "()", bst.printKeysInOrder());
-           	    
-           	    bst.put(7, 7);   //        _7_
-           	    bst.put(8, 8);   //      /     \
-           	    bst.putDag1(4, 4, bst.root);
-           	    bst.putDag1(5, 5, bst.root);
-           	    System.out.println( bst.root.successor.get(1).key);
-           	    List<String> a = new ArrayList<String>();
+     DAG<Integer, Integer> bst = new DAG<Integer, Integer>();
+           	    bst.addNode(1);
+           	    bst.addNode(2);
+           	    bst.addNode(3);
+           	    bst.addNode(4);
+           	    bst.connect(2,5);
+           	    System.out.println( bst.search(5).key);
+           	    //List<String> a = new ArrayList<String>();
            	  //a.add("aa");
            	    
            	  //System.out.println(a.next());
