@@ -268,17 +268,25 @@ public class BST<Key extends Comparable<Key>, Value> {
         	    	if (find.key==key)
         	    		return find;
         	    	
-        	    	int i=-1;
-        	    	if(find.successor!=null){
-	        	    	while(i<find.successor.size()){
-	        	    		i++;
-	        	    		if(find.successor.get(i).key==key)
-	        	    			return find.successor.get(i);
-	        	    	}
+        	    int i=-1;
+    	    	
+        	    if(find.successor!=null){
+	        	    while((i+1)<find.successor.size()){
+	        	    	i++;
+	        	    	//System.out.println(find.key);
+	        	    	return search(find.successor.get(i),key,j);
+	        	      } 
         	    	}
-        	     return search(find.successor.get(j),key, j+1);
-        	    }
         	    
+        	    
+        	    return find;
+        	   }
+        	    
+        	    public void test(){
+        	    	Node n=root.successor.get(0);
+        	    	//System.out.println(n.successor.get(0).key);
+        	    	//System.out.println(n.successor.size());
+        	    }
         	     
          }
          
@@ -289,8 +297,10 @@ public class BST<Key extends Comparable<Key>, Value> {
            	    bst.addNode(2);
            	    bst.addNode(3);
            	    bst.addNode(4);
-           	    bst.connect(2,5);
-           	    System.out.println( bst.search(5).key);
+           	    bst.connect(3,5);
+           	    bst.connect(5,6);
+           	    bst.test();
+           	    System.out.println(bst.search(6).key);
            	    //List<String> a = new ArrayList<String>();
            	  //a.add("aa");
            	    
