@@ -332,27 +332,64 @@ public class BST<Key extends Comparable<Key>, Value> {
 		}
 		private boolean connectCheck(Node head, Node first, Node second, int count, boolean ans){
 			int i = -1;
-			System.out.println(count);
 			if(head.key==second.key)
 				count++;
 			if(count>0&&head.key==first.key){				
 				ans= false;
 				return ans;
-				
 			}
 			if (head.successor != null) {
 				
 				while ((i + 1) < head.successor.size()) {
 					i++;
-					
 					 ans=connectCheck(head.successor.get(i), first, second,count,ans);
-				}
-			
+				}	
 			}
 			
 			return ans;
 		}
-		
+		public Node LCA (Node first, Node second){
+			if(first.key==second.key)
+				return first;
+			return LCA(root,first, second,root);
+		}
+		private Node LCA(Node head, Node first, Node second, Node ans){
+			int i = -1;
+		    if(head.key==first.key){
+		    	ans=searchLCA(first,second.key,ans,first);
+		    	return ans;
+		    }
+		    if(head.key==second.key){
+		    	ans=searchLCA(second,first.key,ans,second);
+		    	return ans;
+		    }
+			if (head.successor != null) {
+				
+				while ((i + 1) < head.successor.size()) {
+					i++;
+					ans=LCA(head.successor.get(i), first, second,ans);
+				}	
+			}
+			
+			return ans;
+		}
+	private Node searchLCA(Node find, Key key, Node ans, Node start) {
+			
+			if (find.key == key){
+			  ans=start;
+			  return ans;
+			}
+			int i = 0;
+
+			if (find.successor != null) {
+				while ((i) < find.successor.size()) {
+					
+					ans=searchLCA(find.successor.get(i), key,ans, start);
+					 i++;
+				}
+			}
+		    return ans;
+		}
 		public void test() {
 			Node n = root.successor.get(0);
 			// System.out.println(n.successor.get(0).key);
@@ -369,7 +406,8 @@ public class BST<Key extends Comparable<Key>, Value> {
 		bst.connectNew(3, 4);
 	
 		bst.test();
-		System.out.println(bst.connect(bst.search(4),bst.search(1)));
+		//System.out.println(bst.connect(bst.search(2),bst.search(3)));
+		System.out.println(bst.LCA(bst.search(3),bst.search(2)).key);
 		// List<String> a = new ArrayList<String>();
 		// a.add("aa");
 
