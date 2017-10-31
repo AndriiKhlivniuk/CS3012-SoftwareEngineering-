@@ -299,7 +299,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		}
 
 		private Node search(Node find, Key key, Node ans) {
-			//System.out.println(find.key);
+			
 			if (find.key == key){
 			  ans=find;
 			  return ans;
@@ -317,11 +317,9 @@ public class BST<Key extends Comparable<Key>, Value> {
 		}
 		
 		public boolean connect(Node first, Node second){
-			Node test=root;
-			int i=-1;
 			boolean toCheck=false;
 			
-				toCheck=connectCheck(test, first, second, 0, 0);
+				toCheck=connectCheck(root, first, second, 0,true);
 				
 			
 			if(toCheck){
@@ -332,14 +330,14 @@ public class BST<Key extends Comparable<Key>, Value> {
 			}
 			return false;
 		}
-		private boolean connectCheck(Node head, Node first, Node second, int j, int count){
+		private boolean connectCheck(Node head, Node first, Node second, int count, boolean ans){
 			int i = -1;
-			System.out.println(head.key);
+			System.out.println(count);
 			if(head.key==second.key)
 				count++;
-			if(count>0&&head.key==first.key){
-					
-				return false;
+			if(count>0&&head.key==first.key){				
+				ans= false;
+				return ans;
 				
 			}
 			if (head.successor != null) {
@@ -347,12 +345,12 @@ public class BST<Key extends Comparable<Key>, Value> {
 				while ((i + 1) < head.successor.size()) {
 					i++;
 					
-					return connectCheck(head.successor.get(i), first, second,0,count);
+					 ans=connectCheck(head.successor.get(i), first, second,count,ans);
 				}
 			
 			}
 			
-			return true;
+			return ans;
 		}
 		
 		public void test() {
@@ -371,8 +369,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		bst.connectNew(3, 4);
 	
 		bst.test();
-		System.out.println(bst.search(4).key);
-		//System.out.println(bst.connect(bst.search(4),bst.search(2)));
+		System.out.println(bst.connect(bst.search(4),bst.search(1)));
 		// List<String> a = new ArrayList<String>();
 		// a.add("aa");
 
