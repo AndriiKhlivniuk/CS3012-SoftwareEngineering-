@@ -5,9 +5,7 @@ import java.util.List;
 public  class DAG<Key extends Comparable<Key>> {
 		public Node root; // root of BST
 
-		/**
-		 * Private node class.
-		 */
+
 		class Node {
 			List<Node> successor;
 			Key key;
@@ -61,16 +59,17 @@ public  class DAG<Key extends Comparable<Key>> {
 		    return ans;
 		}
 		
-		public boolean connect(Node first, Node second){    // connect two existing nodes according to DAG graph structure
+		public boolean connect(Key first, Key second){    // connect two existing nodes according to DAG graph structure
 			boolean toCheck=false;
-			
-				toCheck=connectCheck(root, first, second, 0,true);
+			Node firstN=search(first);
+			Node secondN=search(second);
+			toCheck=connectCheck(root, firstN, secondN, 0,true);
 				
 			
 			if(toCheck){
-				if (first.successor == null)
-					first.successor = new ArrayList<Node>();
-				first.successor.add(second);
+				if (firstN.successor == null)
+					firstN.successor = new ArrayList<Node>();
+				firstN.successor.add(secondN);
 				return true;
 			}
 			return false;
@@ -93,10 +92,12 @@ public  class DAG<Key extends Comparable<Key>> {
 			
 			return ans;
 		}
-		public Node LCA (Node first, Node second){   // find LCA for two nodes in DAG graph
-			if(first.key==second.key)
-				return first;
-			return LCA(root,first, second,root);
+		public Node LCA (Key first, Key second){   // find LCA for two nodes in DAG graph
+			Node firstN=search(first);
+			Node secondN=search(second);
+			if(first==second)
+				return firstN;
+			return LCA(root,firstN, secondN,root);
 		}
 		private Node LCA(Node head, Node first, Node second, Node ans){
 			int i = -1;
@@ -135,5 +136,19 @@ public  class DAG<Key extends Comparable<Key>> {
 			}
 		    return ans;
 		}
+	
+	public boolean isConnected(Key first, Key second){ // checks if second node is successor of first
+		Node firstN=search(first);
+		Node secondN=search(second);
+		if(firstN.successor==null)
+			return false;
+		int i=-1;
+		while ((i+1)<firstN.successor.size()){
+			i++;
+			if(firstN.successor.get(i).key==secondN.key)
+				return true;
+		}
+		return false;
+	}
 
 	}

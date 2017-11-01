@@ -218,6 +218,16 @@ public class BSTTest
             "3", graph.search("3").key);
 	 
  }
-
+    @Test
+ 	public void testConnectNew(){
+    	DAG<String> graph = new DAG<String>();
+		graph.addNode("1");
+		graph.addNode("2");
+		graph.addNode("3");
+        graph.connectNew("3","4");
+     assertEquals("Checks if second node is successor of first",
+            true, graph.isConnected("3","4"));
+    
+ }
  
 }
