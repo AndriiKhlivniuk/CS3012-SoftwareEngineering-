@@ -242,4 +242,16 @@ public class BSTTest
             true, graph.isConnected("4","2"));
     
  }
+    @Test
+ 	public void testLCA(){
+    	DAG<String> graph = new DAG<String>();
+		graph.addNode("1");
+		graph.addNode("2");
+		graph.addNode("3");
+        graph.connectNew("3","4");
+        graph.connect("4", "2");
+     assertEquals("Checking Lowest common ancestor for two nodes",
+            "4", graph.LCA("4","2").key);
+    
+ }
 }
