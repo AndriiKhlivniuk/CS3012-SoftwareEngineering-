@@ -178,7 +178,7 @@ public class BSTTest
      bst.put("5", 5);   //        \
                         //         5
      
-     assertEquals("Checking height of the tree", "7", bst.LowestCommonAncestor("1","8"));
+     assertEquals("Checking Lowest common ancestor", "7", bst.LowestCommonAncestor("1","8"));
 
 
 	 
@@ -201,6 +201,21 @@ public class BSTTest
      
      assertEquals("Checking order of constructed tree",
              "(((()1(()2()))3((()4(()5()))6()))7(()8()))", bst.printKeysInOrder());
+	 
+ }
+    @Test
+ 	public void testDagAddNode(){
+    	DAG<String> graph = new DAG<String>();
+		graph.addNode("1");
+		graph.addNode("2");
+		graph.addNode("3");
+     
+     assertEquals("Checking if given node is in the graph",
+            "1", graph.search("1").key);
+     assertEquals("Checking if given node is in the graph",
+            "2", graph.search("2").key);
+     assertEquals("Checking if given node is in the graph",
+            "3", graph.search("3").key);
 	 
  }
 
