@@ -229,5 +229,17 @@ public class BSTTest
             true, graph.isConnected("3","4"));
     
  }
- 
+
+    @Test
+ 	public void testConnect(){
+    	DAG<String> graph = new DAG<String>();
+		graph.addNode("1");
+		graph.addNode("2");
+		graph.addNode("3");
+        graph.connectNew("3","4");
+        graph.connect("4", "2");
+     assertEquals("Checks if second node is successor of first",
+            true, graph.isConnected("4","2"));
+    
+ }
 }
